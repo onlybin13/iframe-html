@@ -50,22 +50,24 @@
 
     <script>
         function loadUrl() {
-            const input = document.getElementById('urlInput');
-            const frame = document.getElementById('webFrame');
-            
-            let url = input.value.trim();
-            
-            if (!url) {
-                alert('请输入有效网址');
-                return;
-            }
-            
-            if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                url = 'https://' + url;
-            }
-            
-            frame.src = url;
+            const url = document.getElementById('urlInput').value;
+            document.getElementById('urlInput').style.display = 'none';
+            document.getElementById('loadButton').style.display = 'none';
+            document.getElementById('frameContainer').style.marginTop = '0';
+            document.getElementById('webFrame').src = url;
         }
     </script>
 </body>
 </html>
+#frameContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+}
+body {
+    margin: 0;
+    overflow: hidden;
+}
