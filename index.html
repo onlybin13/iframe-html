@@ -4,7 +4,8 @@
     <title>网页加载器</title>
     <style>
         body {
-            margin: 20px;
+            margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
         }
         .container {
@@ -27,21 +28,22 @@
             cursor: pointer;
         }
         #frameContainer {
-            margin-top: 20px;
-            height: calc(100vh - 120px);
-            border: 1px solid #ddd;
+            height: 0;
+            overflow: hidden;
+            transition: height 0.3s ease;
         }
         iframe {
             width: 100%;
             height: 100%;
             border: none;
+            margin: 0;
+            padding: 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <input type="text" id="urlInput" 
-               placeholder="请输入完整网址（例：https://www.example.com）">
+        <input type="text" id="urlInput" placeholder="请输入完整网址（例：https://www.example.com）">
         <button id="loadButton" onclick="loadUrl()">立即跳转</button>
         <div id="frameContainer">
             <iframe id="webFrame"></iframe>
@@ -51,10 +53,18 @@
     <script>
         function loadUrl() {
             const url = document.getElementById('urlInput').value;
+            const frameContainer = document.getElementById('frameContainer');
+            const webFrame = document.getElementById('webFrame');
+            
+            // 隐藏输入框和按钮
             document.getElementById('urlInput').style.display = 'none';
             document.getElementById('loadButton').style.display = 'none';
-            document.getElementById('frameContainer').style.marginTop = '0';
-            document.getElementById('webFrame').src = url;
+            
+            // 设置iframe容器的高度为视口高度
+            frameContainer.style.height = '100vh';
+            
+            // 设置iframe的src属性
+            webFrame.src = url;
         }
     </script>
 </body>
